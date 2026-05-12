@@ -3,6 +3,10 @@ using SalaFinder.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.IdentityModel.JsonWebTokens;
+using System.IdentityModel.Tokens.Jwt;
+using JwtRegisteredClaimNames = System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames;
 
 namespace ApiConciertos.Services
 {
