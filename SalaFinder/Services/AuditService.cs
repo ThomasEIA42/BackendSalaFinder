@@ -13,6 +13,8 @@ using Microsoft.IdentityModel.JsonWebTokens;
 using System.IdentityModel.Tokens.Jwt;
 using JwtRegisteredClaimNames = System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames;
 
+namespace SalaFinder.Services;
+
 public class AuditService : IAuditService
 {
     private readonly ApplicationDbContext _context;

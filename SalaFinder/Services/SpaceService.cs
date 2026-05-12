@@ -3,6 +3,9 @@ using SalaFinder.Interfaces;
 using SalaFinder.Models;
 using Microsoft.EntityFrameworkCore;
 
+
+namespace SalaFinder.Services;
+
 public class SpaceService : ISpaceService
 {
     private readonly ApplicationDbContext _context;

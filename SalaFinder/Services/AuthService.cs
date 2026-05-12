@@ -8,7 +8,7 @@ using Microsoft.IdentityModel.JsonWebTokens;
 using System.IdentityModel.Tokens.Jwt;
 using JwtRegisteredClaimNames = System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames;
 
-namespace ApiConciertos.Services
+namespace SalaFinder.Services
 {
     public class AuthService : IAuthService
     {

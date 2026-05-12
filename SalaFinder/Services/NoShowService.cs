@@ -4,7 +4,10 @@ using SalaFinder.DAO;
 using SalaFinder.Interfaces;
 using SalaFinder.Models;
 
+namespace SalaFinder.Services;
+
 public class NoShowService : INoShowService
+
 {
     private readonly ApplicationDbContext _context;
 

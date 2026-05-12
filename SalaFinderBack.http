@@ -1,0 +1,6 @@
+@SalaFinderBack_HostAddress = http://localhost:5298
+
+GET {{SalaFinderBack_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
