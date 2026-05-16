@@ -1,32 +1,26 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SalaFinder.DAO;
-using SalaFinder.Services;
-using SalaFinder.Interfaces;
+using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
+using SalaFinder.DAO;
+using SalaFinder.Interfaces;
+using SalaFinder.Services;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
-// ✅ Registrar el DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// ✅ Registrar Identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-// ✅ Registrar todos los servicios
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IAuditService, AuditService>();
-builder.Services.AddScoped<INoShowService, NoShowService>();
-builder.Services.AddScoped<IReservationService, ReservationService>();
-builder.Services.AddScoped<ISpaceService, SpaceService>();
 
-// NUEVO - Configuración JWT
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -47,7 +41,14 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// NUEVO - CORS
+
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IAuditService, AuditService>();
+builder.Services.AddScoped<INoShowService, NoShowService>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
+builder.Services.AddScoped<ISpaceService, SpaceService>();
+
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -64,6 +65,7 @@ app.MapScalarApiReference(options =>
 });
 
 app.UseHttpsRedirection();
+app.UseCors("AllowAll");
 app.UseAuthentication(); 
 app.UseAuthorization();
 app.MapControllers();
